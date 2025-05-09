@@ -1,0 +1,1 @@
+In this project i'm following a tutorian from YT to understand the TS/JS syntax
