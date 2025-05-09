@@ -10,32 +10,33 @@ type Order = {
     status: "ordered" | "completed",
 }
 
-//addding a change to test git ignore
 
-
-const menu: Pizza[] = [
-    {id: 1, name: "Margarita", price: 8},
-    {id: 2, name: "Pepperoni", price: 9},
-    {id: 3, name: "BBQ Chicken", price: 10},
-    {id: 4, name: "Veggie", price: 8},
-    {id: 5, name: "Hawaiian", price: 10},  
-]
-
-let nextPizzaId = 6;
-
+let nextPizzaId = 1;
 let cashInRegister = 100;
 const orderHistory: Order[] = [];
 let nextOrderID = 1;
+
+const menu: Pizza[] = [
+    {id: nextPizzaId++, name: "Margarita", price: 8},
+    {id: nextPizzaId++, name: "Pepperoni", price: 9},
+    {id: nextPizzaId++, name: "BBQ Chicken", price: 10},
+    {id: nextPizzaId++, name: "Veggie", price: 8},
+    {id: nextPizzaId++, name: "Hawaiian", price: 10},  
+]
 
 // function addNewPizzaFromScratch(name, price) {
 //     menu.push({name, price})
 //     console.log("Added ${name} to the menu for ${price}.")
 // }
 
-function addNewPizza(pizzaObj: Pizza): void {
-    pizzaObj.id = nextPizzaId++
-    menu.push(pizzaObj)
-    console.log(`Added ${pizzaObj.name} :id: ${pizzaObj.id} to the menu for ${pizzaObj.price}.`)   
+function addNewPizza(newPizza: Omit<Pizza, "id">): void {
+    //example of utility type, using the Omit<type, "property name"> to omit the id property from the parameters
+    const pizza = {
+        id: nextPizzaId++,
+        ...newPizza
+    }
+    menu.push(pizza)
+    console.log(`Added  ${pizza.name} with id:  ${pizza.id} to the menu for ${pizza.price}.`)   
 }
 
 function getPizzaDetail(identifier: number | string): Pizza | undefined{
@@ -50,20 +51,6 @@ function getPizzaDetail(identifier: number | string): Pizza | undefined{
     }
 }
 
-/* function placeOrder (pizzaName) {
-    // My own function
-    if (pizzaName in menu) {
-        cashInRegister += menu[pizzaName].price
-        newOrder = {id: orderID++, pizza: "${pizzaName}", status: "ordered"}
-        orderQueue.push(newOrder)
-        return newOder
-    }
-    else{
-        console.log("Sorry, we don't have ${pizzaName} on the menu.")
-        return
-
-    }
-} */
 
 function placeOrderJS (pizzaName: string): Order | undefined {
     // function from the tutorial
@@ -90,9 +77,9 @@ function completeOrder(orderId: number): Order | undefined {
     
 }
 
-addNewPizza({id: 7, name: "Chicken Ranch", price: 8})
-addNewPizza({id: 8, name: "Buffalo Chicken", price: 10})
-addNewPizza({id: 9, name: "Meat & Cheese Lovers", price: 12})
+addNewPizza({name: "Chicken Ranch", price: 8})
+addNewPizza({name: "Buffalo Chicken", price: 10})
+addNewPizza({name: "Meat & Cheese Lovers", price: 12})
 
 placeOrderJS("Margarita")
 completeOrder(1)

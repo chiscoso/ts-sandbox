@@ -1,3 +1,5 @@
+// example of using types, and union types in Typescript
+
 type userRole = "guest" | "member" | "admin"
 
 type User = {
