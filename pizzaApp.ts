@@ -10,6 +10,8 @@ type Order = {
     status: "ordered" | "completed",
 }
 
+//addding a change to test git ignore
+
 
 const menu: Pizza[] = [
     {id: 1, name: "Margarita", price: 8},
